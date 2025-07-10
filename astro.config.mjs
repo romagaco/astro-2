@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: "https://romagaco.github.io",
-  base: "/helpless-heliosphere/", // Base path 
+  base: "/astro-2", // Base path 
   i18n: {
     defaultLocale: 'es', // Default language
     locales: ['es', 'en'], // Supported languages
