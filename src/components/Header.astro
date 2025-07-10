@@ -1,46 +1,50 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 const { title } = Astro.props;
-const currentLang = Astro.currentLocale || 'es'; // Fallback to 'es'
-const targetLang = currentLang === 'es' ? 'en' : 'es';
-
+const currentLang = Astro.currentLocale;
 const links = {
-	es: [{link: getRelativeLocaleUrl(currentLang, "/"), linkText: "Inicio" },
-	{link: getRelativeLocaleUrl(currentLang, "/about"), linkText: "Acerca de" },
-	{link: getRelativeLocaleUrl(currentLang, "/blog"), linkText: "Blog" },
-	{link: "/en/", linkText: "Ingles" }
-	],
-
-	en: [{link: getRelativeLocaleUrl(currentLang, "/"), linkText: "Home" },
-	{link: getRelativeLocaleUrl(currentLang, "/about"), linkText: "About" },
-	{link: getRelativeLocaleUrl(currentLang, "/blog"), linkText: "Blog" },
-	{link: "/en/", linkText: "Spanish" }
-	]
-}
+  es: [
+    { link: getRelativeLocaleUrl(currentLang, "/"), linkText: "Inicio" },
+    {
+      link: getRelativeLocaleUrl(currentLang, "/about"),
+      linkText: "Acerca de",
+    },
+    { link: getRelativeLocaleUrl(currentLang, "/blog"), linkText: "Blog" },
+    { link: getRelativeLocaleUrl("en", "/"), linkText: "Inglés" },
+  ],
+  en: [
+    { link: getRelativeLocaleUrl(currentLang, "/"), linkText: "Home" },
+    { link: getRelativeLocaleUrl(currentLang, "/about"), linkText: "About" },
+    { link: getRelativeLocaleUrl(currentLang, "/blog"), linkText: "Blog" },
+    { link: getRelativeLocaleUrl("es", "/"), linkText: "Spanish" },
+  ],
+};
 ---
 
 <header>
-    <h1>{title}</h1>
-    <nav>
-        {links[currentLang].map(item => {
-			return <a href={item.link}>{item.linkText}</a>
-		})}
-    </nav>
+  <h1>{title}</h1>
+  <nav>
+    {
+      links[currentLang].map((item: { link: string; linkText: string }) => {
+        return <a href={item.link}>{item.linkText}</a>;
+      })
+    }
+  </nav>
 </header>
 
 <style>
-	header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 1rem;
-		background-color: rgb(68, 62, 62);
-		color: wheat;
-	}
-	header nav a {
-		margin: 0 1rem;
-		color: tomato;
-		text-decoration: none;
-	}
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+  }
+  header nav a {
+    margin: 0 1rem;
+    color: #fff;
+    text-decoration: none;
+  }
 </style>
