@@ -5,11 +5,11 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	i18n: {
-		defaultLocale: "es",
-		locales: ["es", "en"],
-		routing: {
-			prefixDefaultLocale: true
-		}
-	}
+  i18n: {
+    defaultLocale: 'es', // Default language
+    locales: ['es', 'en'], // Supported languages
+    routing: {
+      prefixDefaultLocale: true, // Enforce /es/ for default locale
+    },
+  },
 });
