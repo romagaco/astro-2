@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,23 +15,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # Updated to v4
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v4 # Updated to v4
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm' # Cache npm dependencies for faster builds
 
-      - name: Astro build
-        uses: withastro/action@v0
-        with:
-          package-manager: npm
+      - name: Install dependencies
+        run: npm install # Installs Astro and dependencies
+
+      - name: Build Astro site
+        run: npm run build # Runs the Astro build command (ensure this is defined in your package.json)
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4 # Added upload-artifact step
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: ./dist # Adjust to your Astro build output directory (usually 'dist')
+          path: ./dist # Adjust if your Astro build output directory is different
 
   deploy:
     needs: build
